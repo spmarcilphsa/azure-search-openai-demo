@@ -75,7 +75,7 @@ param documentIntelligenceResourceGroupName string = '' // Set in main.parameter
 // Limited regions for new version:
 // https://learn.microsoft.com/azure/ai-services/document-intelligence/concept-layout
 @description('Location for the Document Intelligence resource group')
-@allowed([ 'eastus', 'westus2', 'westeurope' ])
+@allowed([ 'eastus', 'westus2', 'westeurope','canadacentral','canadaeast' ])
 @metadata({
   azd: {
     type: 'location'
@@ -153,7 +153,7 @@ param useLocalHtmlParser bool = false
 
 var abbrs = loadJsonContent('abbreviations.json')
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
-var tags = { 'azd-env-name': environmentName }
+var tags = { 'azd-env-name': environmentName, SolutionName: 'WebSolutionsApp' }
 var computerVisionName = !empty(computerVisionServiceName) ? computerVisionServiceName : '${abbrs.cognitiveServicesComputerVision}${resourceToken}'
 
 var useKeyVault = useSearchServiceKey
